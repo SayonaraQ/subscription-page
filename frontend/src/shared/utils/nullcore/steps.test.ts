@@ -1,12 +1,12 @@
 import { TSubscriptionPageBlockConfig } from '@remnawave/subscription-page-types'
 import { describe, expect, it } from 'vitest'
 
-import { findPrimaryBlockIndex } from './steps'
+import { findPrimaryBlockIndex, isWarningBlock } from './steps'
 
 const block = (...types: string[]) =>
     ({
         svgIconKey: 'x',
-        svgIconColor: 'violet',
+        svgIconColor: 'grape',
         title: { en: 't', ru: 't' },
         description: { en: 'd', ru: 'd' },
         buttons: types.map((type) => ({
@@ -32,5 +32,18 @@ describe('findPrimaryBlockIndex', () => {
 
     it('returns -1 when no block adds the subscription', () => {
         expect(findPrimaryBlockIndex([block('external'), block('copyButton')])).toBe(-1)
+    })
+})
+
+describe('isWarningBlock', () => {
+    const colored = (svgIconColor: string) =>
+        ({ ...block(), svgIconColor }) as TSubscriptionPageBlockConfig
+
+    it.each(['red', 'orange', 'yellow'])('treats a %s icon as a warning step', (color) => {
+        expect(isWarningBlock(colored(color))).toBe(true)
+    })
+
+    it.each(['grape', 'violet', 'cyan', 'blue'])('treats a %s icon as a regular step', (color) => {
+        expect(isWarningBlock(colored(color))).toBe(false)
     })
 })

@@ -1,7 +1,6 @@
 import type { TSubscriptionPageAppConfig } from '@remnawave/subscription-page-types'
 
 import { IconCheck } from '@tabler/icons-react'
-import clsx from 'clsx'
 
 import { getIconFromLibrary } from '@shared/utils/config-parser'
 import { appMonogram, nc } from '@shared/utils/nullcore'
@@ -20,17 +19,15 @@ interface AppPickerProps {
 export const AppPicker = ({ platformApps, selectedAppIndex, onSelect }: AppPickerProps) => {
     const { svgLibrary } = useAppConfig()
     const currentLang = useCurrentLang()
-    const featuredIndex = platformApps.findIndex((app) => app.featured)
 
     const renderApp = (app: TSubscriptionPageAppConfig, index: number) => {
-        const isFeaturedCard = index === featuredIndex
         const isSelected = index === selectedAppIndex
         const icon = app.svgIconKey && getIconFromLibrary(app.svgIconKey, svgLibrary)
 
         return (
             <button
                 aria-pressed={isSelected}
-                className={clsx(classes.appCard, isFeaturedCard && classes.featuredApp)}
+                className={classes.appCard}
                 key={index}
                 onClick={() => {
                     vibrate('toggle')
@@ -57,7 +54,7 @@ export const AppPicker = ({ platformApps, selectedAppIndex, onSelect }: AppPicke
                         </span>
                     )}
                 </span>
-                {isFeaturedCard && isSelected && (
+                {isSelected && (
                     <span aria-hidden="true" className={classes.checkBadge}>
                         <IconCheck size={14} stroke={3} />
                     </span>
@@ -69,14 +66,9 @@ export const AppPicker = ({ platformApps, selectedAppIndex, onSelect }: AppPicke
     return (
         <div className={classes.options}>
             <div className={classes.label}>{nc('app', currentLang)}</div>
-            {featuredIndex >= 0 && renderApp(platformApps[featuredIndex], featuredIndex)}
-            {(featuredIndex === -1 || platformApps.length > 1) && (
-                <div className={classes.appGrid}>
-                    {platformApps.map((app, index) =>
-                        index === featuredIndex ? null : renderApp(app, index)
-                    )}
-                </div>
-            )}
+            <div className={classes.appList}>
+                {platformApps.map((app, index) => renderApp(app, index))}
+            </div>
         </div>
     )
 }

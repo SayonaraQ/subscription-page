@@ -8,7 +8,7 @@ import { useTranslation } from '@shared/hooks'
 import { openSubscriptionQrModal } from '@shared/ui'
 import { getIconFromLibrary, getLocalizedText } from '@shared/utils/config-parser'
 import { constructSubscriptionUrl } from '@shared/utils/construct-subscription-url'
-import { copyOrShowQr, findPrimaryBlockIndex, nc } from '@shared/utils/nullcore'
+import { copyOrShowQr, findPrimaryBlockIndex, isWarningBlock, nc } from '@shared/utils/nullcore'
 
 import { useAppConfig } from '@entities/app-config-store'
 import { useSubscription } from '@entities/subscription-info-store'
@@ -83,7 +83,11 @@ export const StepsList = ({ blocks, isMobile }: StepsListProps) => {
 
                         return (
                             <li
-                                className={clsx(classes.step, isPrimary && classes.primaryStep)}
+                                className={clsx(
+                                    classes.step,
+                                    isPrimary && classes.primaryStep,
+                                    !isPrimary && isWarningBlock(block) && classes.warningStep
+                                )}
                                 key={index}
                             >
                                 <span aria-hidden="true" className={classes.stepNumber}>
