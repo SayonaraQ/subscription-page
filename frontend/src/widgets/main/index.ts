@@ -1,3 +1,4 @@
+export * from './connect-guide/connect-guide.widget'
 export * from './installation-guide'
 export * from './nullcore-header'
 export * from './raw-keys'

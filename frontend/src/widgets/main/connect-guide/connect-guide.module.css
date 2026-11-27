@@ -1,0 +1,396 @@
+.guide {
+    --guide-padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    padding: var(--guide-padding);
+    border: 1px solid rgba(178, 167, 198, .16);
+    border-radius: 22px;
+    background: rgba(22, 13, 35, .74);
+    backdrop-filter: blur(18px);
+    color: var(--nc-text);
+    line-height: normal;
+}
+
+.guide button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.guide button:focus-visible {
+    outline: 2px solid var(--nc-accent-300);
+    outline-offset: 2px;
+}
+
+.title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -.01em;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    color: var(--nc-text-2);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.platforms {
+    display: flex;
+    gap: 8px;
+    margin-inline-end: calc(-1 * var(--guide-padding));
+    padding-inline-end: var(--guide-padding);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.platforms::-webkit-scrollbar {
+    display: none;
+}
+
+.platformChip {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 14px;
+    border: 1px solid var(--nc-border-strong);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .04);
+    color: #DCD3EA;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.platforms .platformChip:focus-visible {
+    outline-offset: -4px;
+}
+
+.platformChip[aria-pressed='true'] {
+    border: 1.5px solid var(--nc-accent);
+    background: rgba(147, 51, 234, .22);
+    color: #fff;
+    font-weight: 700;
+}
+
+.platformIcon,
+.stepButtonIcon {
+    display: flex;
+    flex: none;
+    align-items: center;
+}
+
+.platformIcon:empty,
+.stepButtonIcon:empty {
+    display: none;
+}
+
+.platformIcon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.appGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.appCard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    height: 56px;
+    padding: 0 12px;
+    border: 1px solid rgba(178, 167, 198, .16);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .035);
+    color: var(--nc-text);
+    text-align: start;
+}
+
+.featuredApp {
+    gap: 12px;
+    height: 64px;
+    padding: 0 14px;
+}
+
+.appCard[aria-pressed='true'] {
+    border: 1.5px solid var(--nc-accent);
+    background: var(--nc-accent-soft);
+    box-shadow: 0 0 26px rgba(147, 51, 234, .25);
+}
+
+.appIcon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .06);
+    color: var(--nc-text-2);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.featuredApp .appIcon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(176, 108, 240, .4);
+    border-radius: 12px;
+    background: #1E1330;
+    color: var(--nc-accent-300);
+    font-size: 13px;
+}
+
+.appIcon svg {
+    width: 75%;
+    height: 75%;
+}
+
+.appDetails {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.appName,
+.recommended {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.appName {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.featuredApp .appName {
+    font-size: 16px;
+}
+
+.recommended {
+    color: #F5C46B;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.checkBadge {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--nc-accent);
+    color: #fff;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.steps:empty {
+    display: none;
+}
+
+.stepList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.step {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 8px 12px;
+    padding: 14px;
+    border: 1px solid rgba(178, 167, 198, .12);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .035);
+}
+
+.primaryStep {
+    border-color: rgba(176, 108, 240, .35);
+    background: rgba(147, 51, 234, .10);
+}
+
+.stepNumber {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(147, 51, 234, .22);
+    color: var(--nc-accent-300);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.primaryStep .stepNumber {
+    background: var(--nc-accent);
+    color: #fff;
+}
+
+.stepContent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.stepTitle {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.stepDescription {
+    color: var(--nc-text-2);
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-line;
+}
+
+.stepDescription a {
+    color: var(--nc-accent-300);
+    text-decoration: underline;
+}
+
+.stepDescription :is(b, strong) {
+    color: var(--nc-text);
+    font-weight: 700;
+}
+
+.stepActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.stepButton,
+.linkButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.stepButton {
+    max-width: 100%;
+    min-height: 44px;
+    padding: 4px 12px;
+    border: 1px solid var(--nc-border-strong);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .05);
+    color: var(--nc-text);
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.stepButton > span:last-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobileSteps .stepButton:not(.primaryButton) {
+    font-size: 14px;
+}
+
+.stepButtonIcon svg {
+    width: 17px;
+    height: 17px;
+}
+
+.primaryButton {
+    width: 100%;
+    min-height: 52px;
+    border: 0;
+    border-radius: 14px;
+    background: var(--nc-accent);
+    box-shadow: 0 10px 28px rgba(147, 51, 234, .45);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.primaryButton .stepButtonIcon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.mobileSteps .stepButton {
+    width: 100%;
+}
+
+.linkActions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 16px;
+}
+
+.step > .linkActions {
+    grid-column: 2;
+}
+
+.mobileSteps .step > .linkActions {
+    grid-column: 1 / -1;
+}
+
+.linkButton {
+    white-space: nowrap;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0 2px;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--nc-accent-300);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.linkButton svg,
+.linkButton:last-child {
+    flex: none;
+}
+
+@media (max-width: 380px) {
+    .appGrid .appCard {
+        gap: 6px;
+        padding-inline: 5px;
+    }
+
+    .linkActions,
+    .linkButton {
+        gap: 4px;
+    }
+}

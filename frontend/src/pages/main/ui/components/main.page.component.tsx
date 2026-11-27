@@ -1,34 +1,29 @@
 import { Container, Stack } from '@mantine/core'
 import { TSubscriptionPagePlatformKey } from '@remnawave/subscription-page-types'
+import { IconMessageCircle } from '@tabler/icons-react'
 import {
-    AccordionBlockRenderer,
-    CardsBlockRenderer,
-    InstallationGuideConnector,
-    MinimalBlockRenderer,
+    ConnectGuideWidget,
     NullcoreHeaderWidget,
     RawKeysWidget,
-    SubscriptionBoardWidget,
-    TimelineBlockRenderer
+    SubscriptionBoardWidget
 } from '@widgets/main'
 
 import { Page } from '@shared/ui'
+import { nc } from '@shared/utils/nullcore'
 
-import { useAppConfig } from '@entities/app-config-store'
+import { useAppConfig, useCurrentLang } from '@entities/app-config-store'
+
+import classes from './main-page.module.css'
 
 interface IMainPageComponentProps {
     isMobile: boolean
     platform: TSubscriptionPagePlatformKey | undefined
 }
 
-const BLOCK_RENDERERS = {
-    cards: CardsBlockRenderer,
-    timeline: TimelineBlockRenderer,
-    accordion: AccordionBlockRenderer,
-    minimal: MinimalBlockRenderer
-} as const
-
 export const MainPageComponent = ({ isMobile, platform }: IMainPageComponentProps) => {
     const config = useAppConfig()
+    const currentLang = useCurrentLang()
+    const { supportUrl } = config.brandingSettings
 
     const hasPlatformApps: Record<TSubscriptionPagePlatformKey, boolean> = {
         ios: Boolean(config.platforms.ios?.apps.length),
@@ -46,8 +41,9 @@ export const MainPageComponent = ({ isMobile, platform }: IMainPageComponentProp
         <Page>
             <Container
                 maw={640}
+                pb={28}
+                pt={16}
                 px={{ base: 16, sm: 24 }}
-                py={16}
                 style={{ position: 'relative', zIndex: 1 }}
             >
                 <Stack gap={16}>
@@ -58,10 +54,7 @@ export const MainPageComponent = ({ isMobile, platform }: IMainPageComponentProp
                     )}
 
                     {atLeastOnePlatformApp && (
-                        <InstallationGuideConnector
-                            BlockRenderer={
-                                BLOCK_RENDERERS[config.uiConfig.installationGuidesBlockType]
-                            }
+                        <ConnectGuideWidget
                             hasPlatformApps={hasPlatformApps}
                             isMobile={isMobile}
                             platform={platform}
@@ -69,6 +62,20 @@ export const MainPageComponent = ({ isMobile, platform }: IMainPageComponentProp
                     )}
 
                     <RawKeysWidget isMobile={isMobile} />
+
+                    {supportUrl !== '' && (
+                        <footer className={classes.footer}>
+                            <a
+                                className={classes.supportLink}
+                                href={supportUrl}
+                                rel="noopener"
+                                target="_blank"
+                            >
+                                <IconMessageCircle aria-hidden="true" size={17} />
+                                {nc('help', currentLang)}
+                            </a>
+                        </footer>
+                    )}
                 </Stack>
             </Container>
         </Page>
