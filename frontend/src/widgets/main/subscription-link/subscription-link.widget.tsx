@@ -1,5 +1,4 @@
 import { ActionIcon, Group } from '@mantine/core'
-import { useClipboard } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import {
     IconBrandDiscord,
@@ -24,20 +23,18 @@ interface IProps {
 export const SubscriptionLinkWidget = ({ supportUrl, hideGetLink }: IProps) => {
     const { t, currentLang, baseTranslations } = useTranslation()
     const subscription = useSubscription()
-    const clipboard = useClipboard({ timeout: 10000 })
 
     const subscriptionUrl = constructSubscriptionUrl(
         window.location.href,
         subscription.user.shortUuid
     )
 
-    const handleCopy = () => {
+    const showCopied = () => {
         notifications.show({
             title: t(baseTranslations.linkCopied),
             message: t(baseTranslations.linkCopiedToClipboard),
             color: 'violet'
         })
-        clipboard.copy(subscriptionUrl)
     }
 
     const renderSupportLink = (supportUrl: string) => {
@@ -72,7 +69,7 @@ export const SubscriptionLinkWidget = ({ supportUrl, hideGetLink }: IProps) => {
     }
 
     const handleGetLink = () => {
-        openSubscriptionQrModal({ subscriptionUrl, t, baseTranslations, onCopy: handleCopy })
+        openSubscriptionQrModal({ subscriptionUrl, t, baseTranslations, onCopied: showCopied })
     }
 
     return (

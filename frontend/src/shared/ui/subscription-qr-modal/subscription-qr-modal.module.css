@@ -14,3 +14,14 @@
     font-weight: 600;
     color: var(--nc-text);
 }
+
+.linkField {
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid var(--nc-border-strong);
+    border-radius: 12px;
+    color: var(--nc-text);
+    font-family: 'Fira Mono', monospace;
+    font-size: 13px;
+    user-select: all;
+    -webkit-user-select: all;
+}

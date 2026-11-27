@@ -311,13 +311,12 @@
     color: var(--nc-text);
     font-size: 15px;
     font-weight: 700;
-    white-space: nowrap;
+    white-space: normal;
+    text-wrap: balance;
 }
 
 .stepButton > span:last-child {
     min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .mobileSteps .stepButton:not(.primaryButton) {

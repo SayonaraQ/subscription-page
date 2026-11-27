@@ -1,6 +1,5 @@
 import type { TSubscriptionPageBlockConfig } from '@remnawave/subscription-page-types'
 
-import { useClipboard } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { IconCopy, IconQrcode } from '@tabler/icons-react'
 import clsx from 'clsx'
@@ -9,13 +8,12 @@ import { useTranslation } from '@shared/hooks'
 import { openSubscriptionQrModal } from '@shared/ui'
 import { getIconFromLibrary, getLocalizedText } from '@shared/utils/config-parser'
 import { constructSubscriptionUrl } from '@shared/utils/construct-subscription-url'
-import { findPrimaryBlockIndex, nc } from '@shared/utils/nullcore'
+import { copyOrShowQr, findPrimaryBlockIndex, nc } from '@shared/utils/nullcore'
 
 import { useAppConfig } from '@entities/app-config-store'
 import { useSubscription } from '@entities/subscription-info-store'
 
 import classes from './connect-guide.module.css'
-import { copyOrShowQr } from './copy-or-show-qr'
 import { useBlockButtonAction } from './use-block-button-action'
 
 interface StepsListProps {
@@ -27,7 +25,6 @@ export const StepsList = ({ blocks, isMobile }: StepsListProps) => {
     const { t, currentLang, baseTranslations } = useTranslation()
     const { baseSettings, svgLibrary } = useAppConfig()
     const subscription = useSubscription()
-    const { copy } = useClipboard({ timeout: 10_000 })
     const handleButtonClick = useBlockButtonAction()
     const primaryIndex = findPrimaryBlockIndex(blocks)
     const subscriptionUrl = constructSubscriptionUrl(
@@ -48,10 +45,7 @@ export const StepsList = ({ blocks, isMobile }: StepsListProps) => {
             subscriptionUrl,
             t,
             baseTranslations,
-            onCopy: () => {
-                showCopied()
-                copy(subscriptionUrl)
-            }
+            onCopied: showCopied
         })
     }
 
