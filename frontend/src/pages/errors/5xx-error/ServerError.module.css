@@ -9,11 +9,11 @@
 
 .label {
     text-align: center;
-    font-weight: 900;
+    font-weight: 800;
     font-size: rem(220px);
     line-height: 1;
     margin-bottom: calc(var(--mantine-spacing-xl) * 1.5);
-    color: var(--mantine-color-blue-3);
+    color: var(--nc-accent-300);
 
     @media (max-width: $mantine-breakpoint-sm) {
         font-size: rem(120px);
@@ -22,9 +22,9 @@
 
 .title {
     text-align: center;
-    font-weight: 900;
+    font-weight: 800;
     font-size: rem(38px);
-    color: var(--mantine-color-white);
+    color: var(--nc-text);
 
     @media (max-width: $mantine-breakpoint-sm) {
         font-size: rem(32px);
@@ -36,5 +36,5 @@
     margin: auto;
     margin-top: var(--mantine-spacing-xl);
     margin-bottom: calc(var(--mantine-spacing-xl) * 1.5);
-    color: var(--mantine-color-blue-1);
+    color: var(--nc-text-2);
 }

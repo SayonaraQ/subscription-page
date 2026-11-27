@@ -1,12 +1,32 @@
-import { createTheme } from '@mantine/core'
+import {
+    createTheme,
+    CSSVariablesResolver,
+    v8CssVariablesResolver,
+    virtualColor
+} from '@mantine/core'
 
 import components from './overrides'
+
+const fontFamily = 'Manrope, Apple Color Emoji, Twemoji Country Flags, sans-serif'
+
+export const cssVariablesResolver: CSSVariablesResolver = (theme) => {
+    const variables = v8CssVariablesResolver(theme)
+
+    return {
+        ...variables,
+        dark: {
+            ...variables.dark,
+            '--mantine-color-body': 'var(--nc-bg)',
+            '--mantine-color-success': 'var(--nc-success)',
+            '--mantine-color-error': 'var(--nc-error)'
+        }
+    }
+}
 
 export const theme = createTheme({
     components,
     cursorType: 'pointer',
-    fontFamily:
-        'Montserrat, Vazirmatn, Apple Color Emoji, Noto Sans SC, Twemoji Country Flags, sans-serif',
+    fontFamily,
     fontFamilyMonospace: 'Fira Mono, monospace',
     breakpoints: {
         xs: '25em',
@@ -21,78 +41,80 @@ export const theme = createTheme({
     scale: 1,
     fontSmoothing: true,
     focusRing: 'never',
-    white: '#ffffff',
-    black: '#24292f',
+    white: '#F5F0FF',
+    black: '#07040C',
     colors: {
         dark: [
-            '#c9d1d9',
-            '#b1bac4',
-            '#8b949e',
-            '#6e7681',
-            '#484f58',
-            '#30363d',
-            '#21262d',
-            '#161b22',
-            '#0d1117',
-            '#010409'
+            '#F5F0FF',
+            '#DCD3EA',
+            '#B2A7C6',
+            '#8E83A3',
+            '#6E6383',
+            '#3A2F4D',
+            '#241834',
+            '#160D23',
+            '#0E0818',
+            '#07040C'
         ],
-
-        blue: [
-            '#ddf4ff',
-            '#b6e3ff',
-            '#80ccff',
-            '#54aeff',
-            '#218bff',
-            '#0969da',
-            '#0550ae',
-            '#033d8b',
-            '#0a3069',
-            '#002155'
+        violet: [
+            '#F7F3FC',
+            '#F1E9F9',
+            '#E0C5F9',
+            '#CA9DF5',
+            '#B06CF0',
+            '#9333EA',
+            '#7B17D8',
+            '#6212AE',
+            '#4A0E83',
+            '#340A5C'
         ],
         green: [
-            '#dafbe1',
-            '#aceebb',
-            '#6fdd8b',
-            '#4ac26b',
-            '#2da44e',
-            '#1a7f37',
-            '#116329',
-            '#044f1e',
-            '#003d16',
-            '#002d11'
+            '#F0FDF4',
+            '#DCFCE7',
+            '#BBF7D0',
+            '#86EFAC',
+            '#4ADE80',
+            '#22C55E',
+            '#16A34A',
+            '#15803D',
+            '#166534',
+            '#14532D'
         ],
         yellow: [
-            '#fff8c5',
-            '#fae17d',
-            '#eac54f',
-            '#d4a72c',
-            '#bf8700',
-            '#9a6700',
-            '#7d4e00',
-            '#633c01',
-            '#4d2d00',
-            '#3b2300'
+            '#FFFBEB',
+            '#FEF3C7',
+            '#FDE68A',
+            '#FCD34D',
+            '#FBBF24',
+            '#F59E0B',
+            '#D97706',
+            '#B45309',
+            '#92400E',
+            '#78350F'
         ],
-        orange: [
-            '#fff1e5',
-            '#ffd8b5',
-            '#ffb77c',
-            '#fb8f44',
-            '#e16f24',
-            '#bc4c00',
-            '#953800',
-            '#762c00',
-            '#5c2200',
-            '#471700'
-        ]
+        red: [
+            '#FEF2F2',
+            '#FEE2E2',
+            '#FECACA',
+            '#FCA5A5',
+            '#F87171',
+            '#EF4444',
+            '#DC2626',
+            '#B91C1C',
+            '#991B1B',
+            '#7F1D1D'
+        ],
+        blue: virtualColor({ name: 'blue', dark: 'violet', light: 'violet' }),
+        teal: virtualColor({ name: 'teal', dark: 'green', light: 'green' }),
+        orange: virtualColor({ name: 'orange', dark: 'yellow', light: 'yellow' })
     },
-    primaryShade: 8,
-    primaryColor: 'cyan',
+    primaryShade: 5,
+    primaryColor: 'violet',
     autoContrast: true,
     luminanceThreshold: 0.3,
     headings: {
-        fontFamily: 'Unbounded, Vazirmatn, Apple Color Emoji, Noto Sans SC, sans-serif',
-        fontWeight: '600'
+        fontFamily,
+        fontWeight: '800'
     },
     defaultRadius: 'md'
 })

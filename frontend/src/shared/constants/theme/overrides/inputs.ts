@@ -1,6 +1,11 @@
-import { InputBase, PasswordInput, Select, TextInput } from '@mantine/core'
+import { Input, InputBase, PasswordInput, Select, TextInput } from '@mantine/core'
+
+import classes from './components.module.css'
 
 export default {
+    Input: Input.extend({
+        classNames: { wrapper: classes.inputWrapper }
+    }),
     InputBase: InputBase.extend({
         defaultProps: {
             radius: 'md'

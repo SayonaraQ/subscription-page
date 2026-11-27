@@ -1,17 +1,17 @@
-import { IconArrowsUpDown, IconCalendar, IconCheck, IconUserScan, IconX } from '@tabler/icons-react'
 import { Box, Group, SimpleGrid, Stack, Text, ThemeIcon } from '@mantine/core'
+import { IconArrowsUpDown, IconCalendar, IconCheck, IconUserScan, IconX } from '@tabler/icons-react'
+
+import { useTranslation } from '@shared/hooks'
+import { formatDate } from '@shared/utils/config-parser'
 
 import { useSubscription } from '@entities/subscription-info-store'
-import { formatDate } from '@shared/utils/config-parser'
-import { useTranslation } from '@shared/hooks'
 
 import classes from './subscription-info-cards.module.css'
 
-type ColorVariant = 'blue' | 'cyan' | 'green' | 'orange' | 'red' | 'teal' | 'violet' | 'yellow'
+type ColorVariant = 'blue' | 'green' | 'orange' | 'red' | 'teal' | 'violet' | 'yellow'
 
 const iconColorClasses: Record<ColorVariant, string> = {
     blue: classes.iconBlue,
-    cyan: classes.iconCyan,
     green: classes.iconGreen,
     teal: classes.iconTeal,
     red: classes.iconRed,
@@ -103,7 +103,7 @@ export const SubscriptionInfoCardsWidget = ({ isMobile: _ }: IProps) => {
             />
 
             <CardItem
-                color="cyan"
+                color="violet"
                 icon={<IconArrowsUpDown size={18} />}
                 label={t(baseTranslations.bandwidth)}
                 value={bandwidthValue}

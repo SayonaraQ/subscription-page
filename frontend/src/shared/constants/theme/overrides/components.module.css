@@ -1,0 +1,95 @@
+.button:where([data-variant='filled']):where(:not(:disabled, [data-disabled])) {
+    --nc-button-hover: var(--mantine-color-violet-6);
+
+    background-color: var(--nc-accent);
+    color: #fff;
+}
+
+.button:where([data-variant='light'], [data-variant='default']):where(:not(:disabled, [data-disabled])) {
+    --nc-button-hover: rgba(255, 255, 255, .09);
+
+    background-color: rgba(255, 255, 255, .05);
+    border: 1px solid var(--nc-border-strong);
+    color: var(--nc-text);
+}
+
+@media (hover: hover) {
+    .button:where([data-variant='filled'], [data-variant='light'], [data-variant='default']):hover:where(:not(:disabled, [data-disabled], [data-loading])) {
+        background-color: var(--nc-button-hover);
+    }
+}
+
+.button:where([data-variant='filled'], [data-variant='light'], [data-variant='default']):active:where(:not(:disabled, [data-disabled], [data-loading])) {
+    background-color: var(--nc-button-hover);
+}
+
+.button:focus-visible,
+.badge:focus-visible,
+.closeButton:focus-visible {
+    outline: 2px solid var(--nc-accent);
+    outline-offset: 2px;
+}
+
+.inputWrapper:where([data-variant='default'], [data-variant='filled']) {
+    --input-bg: var(--nc-surface-solid);
+    --input-bd-focus: var(--nc-accent);
+}
+
+.inputWrapper:where([data-variant='default'], [data-variant='filled']):where(:not([data-error], [data-success])) {
+    --input-bd: var(--nc-border);
+}
+
+.dropdown,
+.tooltip,
+.drawerContent,
+.drawerHeader,
+.badge {
+    background-color: var(--nc-surface-solid);
+}
+
+.dropdown {
+    --popover-border-color: var(--nc-border);
+
+    color: var(--nc-text);
+}
+
+.menuItem:where(:hover, :focus, [data-menu-active]):where(:not(:disabled, [data-disabled])),
+.option:where(:hover, [data-combobox-active]):where(:not([data-combobox-selected], [data-combobox-disabled])) {
+    background-color: var(--nc-accent-soft);
+    color: var(--nc-accent-300);
+}
+
+.option:where([data-combobox-selected]):where(:not([data-combobox-disabled])) {
+    background-color: var(--nc-accent);
+    color: #fff;
+}
+
+.tooltip,
+.notification,
+.drawerContent,
+.badge {
+    border: 1px solid var(--nc-border);
+}
+
+.tooltip {
+    color: var(--nc-text);
+}
+
+.tooltipArrow {
+    border: 1px solid var(--nc-border);
+}
+
+.badge {
+    color: var(--nc-accent-300);
+}
+
+.notification {
+    background-color: var(--nc-surface);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.closeButton:where(:hover, :active) {
+    background-color: var(--nc-accent-soft);
+    color: var(--nc-accent-300);
+}

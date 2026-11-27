@@ -1,6 +1,6 @@
 import { ThemeIcon } from '@mantine/core'
 
-import { ColorGradientStyle } from '@shared/utils/config-parser'
+import { ColorGradientStyle, getIconColor } from '@shared/utils/config-parser'
 
 interface IProps {
     getIconFromLibrary: (iconKey: string) => string
@@ -14,7 +14,7 @@ export const ThemeIconShared = (props: IProps) => {
 
     return (
         <ThemeIcon
-            color={svgIconColor}
+            color={getIconColor(svgIconColor)}
             radius="xl"
             size={isMobile ? 36 : 44}
             style={{

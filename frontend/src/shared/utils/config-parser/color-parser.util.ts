@@ -1,21 +1,25 @@
+const violet: [number, number, number] = [147, 51, 234]
+const success: [number, number, number] = [34, 197, 94]
+const warning: [number, number, number] = [245, 158, 11]
+
 const COLORS: Record<string, [number, number, number]> = {
-    cyan: [34, 211, 238],
-    teal: [32, 201, 151],
-    green: [64, 192, 87],
+    teal: success,
+    green: success,
     lime: [130, 201, 30],
-    yellow: [250, 176, 5],
-    orange: [253, 126, 20],
-    red: [250, 82, 82],
+    yellow: warning,
+    orange: warning,
+    red: [239, 68, 68],
     pink: [230, 73, 128],
     grape: [190, 75, 219],
-    violet: [151, 117, 250],
+    violet,
     indigo: [92, 124, 250],
-    blue: [34, 139, 230],
-    gray: [134, 142, 150],
-    dark: [55, 58, 64]
+    blue: violet,
+    gray: [178, 167, 198],
+    dark: [58, 47, 77]
 }
 
-const DEFAULT_COLOR = COLORS.cyan
+export const getIconColor = (color: string): string =>
+    Object.hasOwn(COLORS, color) || color.startsWith('#') ? color : 'violet'
 
 const hexToRgb = (hex: string): [number, number, number] | null => {
     const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
@@ -23,7 +27,7 @@ const hexToRgb = (hex: string): [number, number, number] | null => {
 }
 
 const getRgb = (color: string): [number, number, number] =>
-    COLORS[color] ?? hexToRgb(color) ?? DEFAULT_COLOR
+    COLORS[color] ?? hexToRgb(color) ?? violet
 
 export interface ColorGradientStyle {
     background: string
@@ -41,8 +45,8 @@ export const getColorGradient = (color: string): ColorGradientStyle => {
 
 export const getColorGradientSolid = (color: string): ColorGradientStyle => {
     const [r, g, b] = getRgb(color)
-    const dark1 = [22 + r * 0.08, 27 + g * 0.08, 35 + b * 0.08].map(Math.floor)
-    const dark2 = [20 + r * 0.05, 24 + g * 0.05, 30 + b * 0.05].map(Math.floor)
+    const dark1 = [22 + r * 0.08, 13 + g * 0.08, 35 + b * 0.08].map(Math.floor)
+    const dark2 = [14 + r * 0.05, 8 + g * 0.05, 24 + b * 0.05].map(Math.floor)
 
     return {
         background: `linear-gradient(135deg, rgb(${dark1}) 0%, rgb(${dark2}) 100%)`,

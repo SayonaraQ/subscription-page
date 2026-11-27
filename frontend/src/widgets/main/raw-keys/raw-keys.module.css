@@ -1,8 +1,9 @@
 .modalContent {
-    background: rgba(22, 27, 35, 0.95);
+    background: var(--nc-surface-solid);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--nc-border);
+    border-radius: 20px;
 }
 
 .modalHeader {
@@ -11,12 +12,12 @@
 
 .modalTitle {
     font-weight: 600;
-    color: white;
+    color: var(--nc-text);
 }
 
 .keyBox {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--nc-surface);
+    border: 1px solid var(--nc-border);
     border-radius: var(--mantine-radius-md);
 }
 

@@ -11,13 +11,14 @@ import {
     Text,
     Title
 } from '@mantine/core'
-import { IconCheck, IconCopy, IconKey, IconQrcode } from '@tabler/icons-react'
 import { modals } from '@mantine/modals'
+import { IconCheck, IconCopy, IconKey, IconQrcode } from '@tabler/icons-react'
 import { renderSVG } from 'uqr'
 
-import { useSubscription } from '@entities/subscription-info-store'
-import { vibrate } from '@shared/utils/vibrate'
 import { useTranslation } from '@shared/hooks'
+import { vibrate } from '@shared/utils/vibrate'
+
+import { useSubscription } from '@entities/subscription-info-store'
 
 import classes from './raw-keys.module.css'
 
@@ -61,8 +62,8 @@ export const RawKeysWidget = ({ isMobile }: IProps) => {
 
     const handleShowQr = (link: ParsedLink) => {
         const qrCode = renderSVG(link.fullLink, {
-            whiteColor: '#161B22',
-            blackColor: '#22d3ee'
+            whiteColor: '#160D23',
+            blackColor: '#D68CFF'
         })
 
         modals.open({
@@ -95,7 +96,7 @@ export const RawKeysWidget = ({ isMobile }: IProps) => {
                         {t(baseTranslations.connectionKeysHeader)}
                     </Title>
                     {parsedLinks.length > 1 && (
-                        <Badge color="cyan" size="lg" variant="light">
+                        <Badge color="violet" size="lg" variant="light">
                             {parsedLinks.length}
                         </Badge>
                     )}
@@ -110,7 +111,7 @@ export const RawKeysWidget = ({ isMobile }: IProps) => {
                                         <IconKey
                                             size={isMobile ? 16 : 18}
                                             style={{
-                                                color: 'var(--mantine-color-cyan-4)',
+                                                color: 'var(--nc-accent-300)',
                                                 flexShrink: 0
                                             }}
                                         />
@@ -130,7 +131,11 @@ export const RawKeysWidget = ({ isMobile }: IProps) => {
                                         <CopyButton value={link.fullLink}>
                                             {({ copied, copy }) => (
                                                 <ActionIcon
-                                                    color={copied ? 'teal' : 'gray'}
+                                                    color={
+                                                        copied
+                                                            ? 'var(--nc-success)'
+                                                            : 'var(--nc-text-2)'
+                                                    }
                                                     onClick={() => {
                                                         vibrate('drop')
                                                         copy()
@@ -148,7 +153,7 @@ export const RawKeysWidget = ({ isMobile }: IProps) => {
                                         </CopyButton>
 
                                         <ActionIcon
-                                            color="cyan"
+                                            color="violet"
                                             onClick={() => {
                                                 vibrate('tap')
                                                 handleShowQr(link)

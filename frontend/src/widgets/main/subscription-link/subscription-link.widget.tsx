@@ -1,3 +1,7 @@
+import { ActionIcon, Button, Group, Image, Stack, Text } from '@mantine/core'
+import { useClipboard } from '@mantine/hooks'
+import { modals } from '@mantine/modals'
+import { notifications } from '@mantine/notifications'
 import {
     IconBrandDiscord,
     IconBrandTelegram,
@@ -6,16 +10,13 @@ import {
     IconLink,
     IconMessageChatbot
 } from '@tabler/icons-react'
-import { ActionIcon, Button, Group, Image, Stack, Text } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
-import { useClipboard } from '@mantine/hooks'
-import { modals } from '@mantine/modals'
 import { renderSVG } from 'uqr'
 
-import { constructSubscriptionUrl } from '@shared/utils/construct-subscription-url'
-import { useSubscription } from '@entities/subscription-info-store'
-import { vibrate } from '@shared/utils/vibrate'
 import { useTranslation } from '@shared/hooks'
+import { constructSubscriptionUrl } from '@shared/utils/construct-subscription-url'
+import { vibrate } from '@shared/utils/vibrate'
+
+import { useSubscription } from '@entities/subscription-info-store'
 
 import classes from './subscription-link.module.css'
 
@@ -38,7 +39,7 @@ export const SubscriptionLinkWidget = ({ supportUrl, hideGetLink }: IProps) => {
         notifications.show({
             title: t(baseTranslations.linkCopied),
             message: t(baseTranslations.linkCopiedToClipboard),
-            color: 'cyan'
+            color: 'violet'
         })
         clipboard.copy(subscriptionUrl)
     }
@@ -56,24 +57,19 @@ export const SubscriptionLinkWidget = ({ supportUrl, hideGetLink }: IProps) => {
 
         const { icon: Icon, color } = matchedPlatform
             ? matchedPlatform[1]
-            : { icon: IconMessageChatbot, color: 'cyan' }
+            : { icon: IconMessageChatbot, color: 'var(--nc-accent-300)' }
 
         return (
             <ActionIcon
-                c={color}
                 component="a"
                 href={supportUrl}
                 radius="md"
                 rel="noopener noreferrer"
                 size="xl"
-                style={{
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
                 target="_blank"
                 variant="default"
             >
-                <Icon />
+                <Icon color={color} />
             </ActionIcon>
         )
     }
@@ -82,8 +78,8 @@ export const SubscriptionLinkWidget = ({ supportUrl, hideGetLink }: IProps) => {
         vibrate('tap')
 
         const subscriptionQrCode = renderSVG(subscriptionUrl, {
-            whiteColor: '#161B22',
-            blackColor: '#22d3ee'
+            whiteColor: '#160D23',
+            blackColor: '#D68CFF'
         })
 
         modals.open({
@@ -124,13 +120,7 @@ export const SubscriptionLinkWidget = ({ supportUrl, hideGetLink }: IProps) => {
     return (
         <Group gap="xs" ml="auto" wrap="nowrap">
             {!hideGetLink && (
-                <ActionIcon
-                    className={classes.actionIcon}
-                    onClick={handleGetLink}
-                    radius="md"
-                    size="xl"
-                    variant="default"
-                >
+                <ActionIcon onClick={handleGetLink} radius="md" size="xl" variant="default">
                     <IconLink />
                 </ActionIcon>
             )}
