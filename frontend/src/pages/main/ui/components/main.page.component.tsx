@@ -1,22 +1,19 @@
-import { Box, Center, Container, Group, Image, Stack, Title } from '@mantine/core'
+import { Container, Stack } from '@mantine/core'
 import { TSubscriptionPagePlatformKey } from '@remnawave/subscription-page-types'
 import {
     AccordionBlockRenderer,
     CardsBlockRenderer,
     InstallationGuideConnector,
     MinimalBlockRenderer,
+    NullcoreHeaderWidget,
     RawKeysWidget,
-    SubscriptionInfoCardsWidget,
-    SubscriptionInfoCollapsedWidget,
-    SubscriptionInfoExpandedWidget,
-    SubscriptionLinkWidget,
+    SubscriptionBoardWidget,
     TimelineBlockRenderer
 } from '@widgets/main'
 
-import { Page, RemnawaveLogo } from '@shared/ui'
-import { LanguagePicker } from '@shared/ui/language-picker/language-picker.shared'
+import { Page } from '@shared/ui'
 
-import { useAppConfig, useAppConfigStoreActions, useCurrentLang } from '@entities/app-config-store'
+import { useAppConfig } from '@entities/app-config-store'
 
 interface IMainPageComponentProps {
     isMobile: boolean
@@ -30,26 +27,8 @@ const BLOCK_RENDERERS = {
     minimal: MinimalBlockRenderer
 } as const
 
-const SUBSCRIPTION_INFO_BLOCK_RENDERERS = {
-    cards: SubscriptionInfoCardsWidget,
-    collapsed: SubscriptionInfoCollapsedWidget,
-    expanded: SubscriptionInfoExpandedWidget,
-    hidden: null
-} as const
-
 export const MainPageComponent = ({ isMobile, platform }: IMainPageComponentProps) => {
     const config = useAppConfig()
-    const currentLang = useCurrentLang()
-    const { setLanguage } = useAppConfigStoreActions()
-
-    const brandName = config.brandingSettings.title
-    let hasCustomLogo = !!config.brandingSettings.logoUrl
-
-    if (hasCustomLogo) {
-        if (config.brandingSettings.logoUrl.includes('docs.rw')) {
-            hasCustomLogo = false
-        }
-    }
 
     const hasPlatformApps: Record<TSubscriptionPagePlatformKey, boolean> = {
         ios: Boolean(config.platforms.ios?.apps.length),
@@ -63,56 +42,19 @@ export const MainPageComponent = ({ isMobile, platform }: IMainPageComponentProp
 
     const atLeastOnePlatformApp = Object.values(hasPlatformApps).some((value) => value)
 
-    const SubscriptionInfoBlockRenderer =
-        SUBSCRIPTION_INFO_BLOCK_RENDERERS[config.uiConfig.subscriptionInfoBlockType]
-
     return (
         <Page>
-            <Box className="header-wrapper" py="md">
-                <Container maw={1200} px={{ base: 'md', sm: 'lg', md: 'xl' }}>
-                    <Group justify="space-between">
-                        <Group gap="sm" style={{ userSelect: 'none' }} wrap="nowrap">
-                            {hasCustomLogo ? (
-                                <Image
-                                    alt="logo"
-                                    fit="contain"
-                                    src={config.brandingSettings.logoUrl}
-                                    style={{
-                                        width: '32px',
-                                        height: '32px',
-                                        flexShrink: 0
-                                    }}
-                                />
-                            ) : (
-                                <RemnawaveLogo c="violet" size={32} />
-                            )}
-                            <Title
-                                c={hasCustomLogo ? 'white' : 'violet'}
-                                fw={700}
-                                order={4}
-                                size="lg"
-                            >
-                                {brandName}
-                            </Title>
-                        </Group>
-
-                        <SubscriptionLinkWidget
-                            hideGetLink={config.baseSettings.hideGetLinkButton}
-                            supportUrl={config.brandingSettings.supportUrl}
-                        />
-                    </Group>
-                </Container>
-            </Box>
-
             <Container
-                maw={1200}
-                px={{ base: 'md', sm: 'lg', md: 'xl' }}
-                py="xl"
+                maw={640}
+                px={{ base: 16, sm: 24 }}
+                py={16}
                 style={{ position: 'relative', zIndex: 1 }}
             >
-                <Stack gap="xl">
-                    {SubscriptionInfoBlockRenderer && (
-                        <SubscriptionInfoBlockRenderer isMobile={isMobile} />
+                <Stack gap={16}>
+                    <NullcoreHeaderWidget />
+
+                    {config.uiConfig.subscriptionInfoBlockType !== 'hidden' && (
+                        <SubscriptionBoardWidget />
                     )}
 
                     {atLeastOnePlatformApp && (
@@ -127,14 +69,6 @@ export const MainPageComponent = ({ isMobile, platform }: IMainPageComponentProp
                     )}
 
                     <RawKeysWidget isMobile={isMobile} />
-
-                    <Center>
-                        <LanguagePicker
-                            currentLang={currentLang}
-                            locales={config.locales}
-                            onLanguageChange={setLanguage}
-                        />
-                    </Center>
                 </Stack>
             </Container>
         </Page>

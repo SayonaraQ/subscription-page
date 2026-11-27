@@ -1,3 +1,4 @@
+export * from './language-toggle/language-toggle.shared'
 export * from './loading-screen'
 export * from './page'
 export * from './remnawave-logo'

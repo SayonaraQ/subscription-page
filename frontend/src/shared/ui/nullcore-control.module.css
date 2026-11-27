@@ -1,0 +1,26 @@
+.control {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(178, 167, 198, .18);
+    border-radius: 14px;
+    background: rgba(22, 13, 35, .7);
+    color: var(--nc-text);
+    font: 700 13px var(--mantine-font-family);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.control:hover {
+    border-color: var(--nc-border-strong);
+    background: var(--nc-surface-solid);
+}
+
+.control:focus-visible {
+    outline: 2px solid var(--nc-accent-300);
+    outline-offset: 2px;
+}

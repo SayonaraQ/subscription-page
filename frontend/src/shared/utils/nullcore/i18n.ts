@@ -1,4 +1,6 @@
 export type TNcKey =
+    | 'language'
+    | 'support'
     | 'subscription'
     | 'remaining'
     | 'until'
@@ -15,6 +17,8 @@ export type TNcKey =
     | 'help'
 
 const translations = {
+    language: { ru: 'Язык', en: 'Language' },
+    support: { ru: 'Поддержка', en: 'Support' },
     subscription: { ru: 'Подписка', en: 'Subscription' },
     remaining: { ru: 'Осталось', en: 'Time left' },
     until: { ru: 'до {date}', en: 'until {date}' },

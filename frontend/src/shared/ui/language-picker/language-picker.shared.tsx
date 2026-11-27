@@ -3,6 +3,7 @@ import { getLanguageInfo, TSubscriptionPageLanguageCode } from '@remnawave/subsc
 import { IconLanguage } from '@tabler/icons-react'
 import { useEffect } from 'react'
 
+import { nc } from '@shared/utils/nullcore'
 import { vibrate } from '@shared/utils/vibrate'
 
 interface IProps {
@@ -51,8 +52,13 @@ export function LanguagePicker(props: IProps) {
     return (
         <Menu position="bottom" width={150} withArrow={false} withinPortal>
             <Menu.Target>
-                <ActionIcon radius="md" size="xl" variant="default">
-                    <IconLanguage size={22} />
+                <ActionIcon
+                    aria-label={nc('language', currentLang)}
+                    radius="md"
+                    size="xl"
+                    variant="default"
+                >
+                    <IconLanguage aria-hidden="true" size={22} />
                 </ActionIcon>
             </Menu.Target>
             <Menu.Dropdown mah={250} style={{ overflowY: 'auto' }}>
